@@ -2,6 +2,7 @@ package pk;
 
 public class FirstProgramm {
     public static void main(String[] args) throws Exception {
+        // This is a comment
         maleTreppe(8, 3);
         maleTreppe(6, 2);
     }
