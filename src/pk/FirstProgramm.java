@@ -10,10 +10,14 @@ public class FirstProgramm {
         String baustein = "";
         for (int i = 0; i < stufentiefe; i++)
             baustein += "*";
+
+        String spacing = "";
+        for (int i = 0; i < hoehe * stufentiefe; i++)
+            spacing += " ";
         String stufe = "";
         for (int i = 0; i < hoehe; i++) {
             stufe += baustein;
-            System.out.println(stufe);
+            System.out.println(spacing.substring(0, ((hoehe - i) * stufentiefe)) + stufe);
         }
     }
 }
