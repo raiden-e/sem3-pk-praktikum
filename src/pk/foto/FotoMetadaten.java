@@ -20,7 +20,7 @@ public class FotoMetadaten {
     }
 
     public String toString() {
-        DateTimeFormatter date = DateTimeFormatter.ofPattern("TT.MM.JJJJ HH:mm:ss");
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("DD.MM.YYYY HH:mm:ss");
         String dateText = erstellungszeitpunkt.format(date);
 
         return String.format("Groesse: %s x %s\nKamera: %s\nErstellungsdatum: %s", hoehe, breite, kameraMarke,
