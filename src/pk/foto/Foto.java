@@ -6,12 +6,10 @@ public class Foto {
     private FotoMetadaten metadaten;
 
     public void drucke() {
-        System.out.println("Fotoname: " + name);
-        System.out.println("Dateiname: " + dateiName);
-        System.out.println(metadaten);
+        System.out.println(toString());
     }
 
     public String toString() {
-        return name + ", " + dateiName;
+        return String.format("Fotoname: %s\nDateiname: %s\n%s", name, dateiName, metadaten);
     }
 }
