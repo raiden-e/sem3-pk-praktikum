@@ -4,6 +4,11 @@ public class Album {
     private String name;
     private String besitzer;
     Foto[] fotos = new Foto[2];
+    
+    public Album (String name, String besitzer) {
+    	this.name = name;
+    	this.besitzer = besitzer;
+    }
 
     public void drucke() {
         System.out.println(toString());
