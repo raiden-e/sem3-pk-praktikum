@@ -1,0 +1,13 @@
+*.java  text diff=java whitespace=trailing-space,space-before-tab,tab-in-indent
+*.ext   whitespace=space-in-indent,tabwidth=4
+
+*.vcproj    eol=crlf
+*.dsp       eol=crlf
+*.dsw       eol=crlf
+
+*.sh    eol=lf
+
+*.jpg   binary
+*.png   binary
+*.gif   binary
+*.tiff  binary
