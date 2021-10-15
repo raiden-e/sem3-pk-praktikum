@@ -10,6 +10,15 @@ public class FotoMetadaten {
     private String kameraModell;
     private LocalDateTime erstellungszeitpunkt;
 
+    public FotoMetadaten(int pbreite, int phoehe, String pkameraMarke, String pkameraModell,
+            LocalDateTime perstellungszeitpunkt) {
+        this.breite = pbreite;
+        this.hoehe = phoehe;
+        this.kameraMarke = pkameraMarke;
+        this.kameraModell = pkameraModell;
+        this.erstellungszeitpunkt = perstellungszeitpunkt;
+    }
+
     public String toString() {
         DateTimeFormatter date = DateTimeFormatter.ofPattern("TT.MM.JJJJ HH:mm:ss");
         String dateText = erstellungszeitpunkt.format(date);

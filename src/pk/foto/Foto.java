@@ -12,6 +12,7 @@ public class Foto {
     	metadaten = new FotoMetadaten(breite, hoehe, kameraMarke, kameraModell, erstellungszeitpunkt);
     }
 
+
     public void drucke() {
         System.out.println(toString());
     }
