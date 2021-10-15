@@ -4,9 +4,9 @@ public class Foto {
     private String name;
     private String dateiName;
     private FotoMetadaten metadaten;
-    
+
     public Foto(String pName, String pDateiName) {
-    	
+
     }
 
     public void drucke() {

@@ -56,7 +56,6 @@ public class FotoVerwaltung {
         for (Album album : alben)
             if (album.getName() == name)
                 return album;
-
         return null;
     }
 }
