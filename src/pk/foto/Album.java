@@ -4,10 +4,10 @@ public class Album {
     private String name;
     private String besitzer;
     Foto[] fotos = new Foto[2];
-    
-    public Album (String name, String besitzer) {
-    	this.name = name;
-    	this.besitzer = besitzer;
+
+    public Album(String name, String besitzer) {
+        this.name = name;
+        this.besitzer = besitzer;
     }
 
     public void drucke() {
@@ -34,12 +34,10 @@ public class Album {
             fotosNeu[j] = fotos[j];
 
         fotosNeu[fotos.length] = foto;
-
         fotos = fotosNeu;
     }
 
     public String toString() {
-
         String x = String.format("Name: %s\nBesitzer: %s", name, besitzer);
         int counter = 1;
         for (Foto foto : fotos)
