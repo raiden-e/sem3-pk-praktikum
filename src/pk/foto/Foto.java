@@ -9,9 +9,9 @@ public class Foto {
         System.out.println("Fotoname: " + name);
         System.out.println("Dateiname: " + dateiName);
         System.out.println(metadaten);
-    };
+    }
 
     public String toString() {
-        return "";
+        return name + ", " + dateiName;
     }
 }

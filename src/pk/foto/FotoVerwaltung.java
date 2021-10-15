@@ -1,10 +1,9 @@
 package pk.foto;
 
-import java.util.LinkedList;
 
 public class FotoVerwaltung {
 	
-	LinkedList<Album> alben = new LinkedList();
+	Album[] alben = new Album[2];
 
 	public void druckeAlleAlben() {
 		

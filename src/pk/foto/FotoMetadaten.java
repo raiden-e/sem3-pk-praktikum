@@ -10,7 +10,7 @@ public class FotoMetadaten {
     private LocalDateTime erstellungszeipunkt;
 
     public String toString() {
-        return String.format("Größe: %s x %s\nKamera: %s\nErstellungsdatum: %s", hoehe, breite, kameraMarke,
+        return String.format("Groesse: %s x %s\nKamera: %s\nErstellungsdatum: %s", hoehe, breite, kameraMarke,
                 kameraModell, erstellungszeipunkt);
     }
 }
