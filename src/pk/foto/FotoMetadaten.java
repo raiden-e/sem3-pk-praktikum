@@ -9,7 +9,8 @@ public class FotoMetadaten {
     private String kameraModell;
     private LocalDateTime erstellungszeipunkt;
 
-    public static String toString() {
-        return "";
+    public String toString() {
+        return String.format("Größe: %s x %s\nKamera: %s\nErstellungsdatum: %s", hoehe, breite, kameraMarke,
+                kameraModell, erstellungszeipunkt);
     }
 }
