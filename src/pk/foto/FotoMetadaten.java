@@ -17,4 +17,5 @@ public class FotoMetadaten {
         return String.format("Groesse: %s x %s\nKamera: %s\nErstellungsdatum: %s", hoehe, breite, kameraMarke,
                 kameraModell, dateText);
     }
+
 }
