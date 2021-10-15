@@ -1,10 +1,21 @@
 package pk.foto;
+import java.time.LocalDateTime;
 
 public class Tester {
     public static void main(String[] args) {
+    	  	
         FotoVerwaltung fotoverwaltung1 = new FotoVerwaltung();
-        fotoverwaltung1.addAlbum(new Album(new Foto("Foto1", "Foto1.png"), new Foto("Foto2", "Foto2.png")));
-        fotoverwaltung1.addAlbum(new Album(new Foto("Foto1", "Foto3.jpg"), new Foto("Foto2", "Foto4.jpg")));
+        
+        Album album1 = new Album("Album1", "Dieter");
+        album1.addFoto(new Foto("Foto1", "Hausaufgaben", 1234, 456, "Sony", "ModelX", LocalDateTime.now())); 
+        album1.addFoto(new Foto("Foto2", "Arbeit", 9866, 2738, "Sony", "ModelX", LocalDateTime.now()));
+
+        fotoverwaltung1.addAlbum(album1);
+        
+        Album album2 = new Album("Album2", "Uschi");
+        fotoverwaltung1.addAlbum(album2);
+        album1.addFoto(new Foto("Foto3", "Urlaub", 678, 3748, "Nikon", "ModelY", LocalDateTime.now())); 
+        album1.addFoto(new Foto("Foto4", "Arbeit", 9866, 2738, "Nikon", "ModelY", LocalDateTime.now()));//new Foto("Foto1", "Foto3.jpg"), new Foto("Foto2", "Foto4.jpg")));
 
         fotoverwaltung1.druckeAlleAlben();
     }
