@@ -5,7 +5,7 @@ public class FotoVerwaltung {
 
     public void druckeAlleAlben() {
         for (int i = 0; i < alben.length; i++)
-            System.out.print(String.format("=== Album %s ===\n%s", i + 1, alben[i]));
+            System.out.print(String.format("\n=== Album %s ===\n%s", i + 1, alben[i]));
     }
 
     public int gibAnzahlAlben() {

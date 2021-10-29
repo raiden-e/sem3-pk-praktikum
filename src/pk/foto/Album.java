@@ -1,17 +1,13 @@
 package pk.foto;
 
-public class Album {
+public class Album extends Fachobjekt {
     private String name;
     private String besitzer;
     Foto[] fotos = new Foto[2];
 
     public Album(String name, String besitzer) {
-        this.name = name;
+        super(name);
         this.besitzer = besitzer;
-    }
-
-    public void drucke() {
-        System.out.println(toString());
     }
 
     public Foto[] getFotos() {
@@ -44,6 +40,10 @@ public class Album {
             x += String.format("\n=== Foto %s ===\n%-4s", counter++, foto);
 
         return x;
+    }
+
+    public void drucke() {
+        System.out.println(toString());
     }
 
     public String getName() {
