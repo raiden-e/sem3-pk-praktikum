@@ -1,6 +1,9 @@
 package pk.foto;
 
 import java.util.Scanner;
+import java.util.concurrent.ForkJoinTask;
+import java.time.LocalDateTime;
+
 import javax.swing.JOptionPane;
 
 public class Menu {
@@ -30,16 +33,16 @@ public class Menu {
                 }
                 String owner = JOptionPane.showInputDialog(null, "Bitte Besitzer einngeben");
                 if (owner == null) {
-                    System.out.println("Sie müssen einen Namen angeben!");
+                    System.out.println("Sie müs2einen Namen angeben!");
                     continue;
                 }
-                fotoverwaltung.addAlbum(new Album(name, owner));
+                Album alb = new Album(name, owner);
                 while (JOptionPane.showConfirmDialog(null, "Foto hinzufügen?", "Foto hinzufügen",
                         JOptionPane.YES_NO_OPTION) == 0) {
-                    String name1 = JOptionPane.showInputDialog(null, "Bitte Namen einngeben");
-                    String owner1 = JOptionPane.showInputDialog(null, "Bitte Besitzer einngeben");
-                    fotoverwaltung.addAlbum(new Album(name1, owner1));
+                    String name1 = JOptionPane.showInputDialog(null, "Bitte Namen eingeben");
+                    alb.addFoto(new Foto(name1, name1 + ".jpg", 1920, 1080, "Sony", "alpha x1", LocalDateTime.now()));
                 }
+                fotoverwaltung.addAlbum(alb);
             } else if (input == 2)
                 fotoverwaltung.druckeAlleAlben();
             else if (input == 3)
@@ -47,7 +50,7 @@ public class Menu {
             else
                 System.out.println("Unerwartete Eingabe! Versuchen Sie es bitte erneut");
 
-            System.out.print(menu);
+            System.out.println(menu);
             input = sc.nextInt();
         }
         sc.close();
