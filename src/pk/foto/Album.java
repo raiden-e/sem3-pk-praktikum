@@ -1,8 +1,12 @@
 package pk.foto;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Album extends Fachobjekt {
     private String besitzer;
-    Foto[] fotos = new Foto[2];
+    List<Foto> fotos = new ArrayList<>();
 
     public Album(String name, String besitzer) {
         super(name);
@@ -10,26 +14,18 @@ public class Album extends Fachobjekt {
     }
 
     public Foto[] getFotos() {
-        return fotos;
+        Iterator<Foto> iter = fotos.iterator();
+        Foto[] rueckgabe = new Foto[fotos.size()];
+        int zaehler = 0;
+        
+        while(iter.hasNext())
+        	rueckgabe[zaehler++] = iter.next();
+        
+        return rueckgabe;
     }
 
     public void addFoto(Foto foto) {
-        int i;
-
-        for (i = 0; i < fotos.length; i++) {
-            if (fotos[i] == null) {
-                fotos[i] = foto;
-                return;
-            }
-        }
-
-        Foto[] fotosNeu = new Foto[fotos.length + 1];
-
-        for (int j = 0; j < fotos.length; j++)
-            fotosNeu[j] = fotos[j];
-
-        fotosNeu[fotos.length] = foto;
-        fotos = fotosNeu;
+        fotos.add(foto);
     }
 
     public String toString() {
