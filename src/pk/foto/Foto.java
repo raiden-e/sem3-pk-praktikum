@@ -18,6 +18,6 @@ public class Foto extends Fachobjekt {
     }
 
     public String toString() {
-        return String.format("Fotoname: %s\nDateiname: %s\n%s", super.getName(), dateiName, metadaten);
+        return String.format("Fotoname: %s\nDateiname: %s\n%s\n", super.getName(), dateiName, metadaten);
     }
 }

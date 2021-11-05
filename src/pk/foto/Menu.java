@@ -26,12 +26,12 @@ public class Menu {
 
         while (input != 4) {
             if (input == 1) {
-                String name = JOptionPane.showInputDialog(null, "Bitte Namen einngeben");
+                String name = JOptionPane.showInputDialog(null, "Bitte Namen eingeben");
                 if (name == null) {
                     System.out.println("Sie müssen einen Namen angeben!");
                     continue;
                 }
-                String owner = JOptionPane.showInputDialog(null, "Bitte Besitzer einngeben");
+                String owner = JOptionPane.showInputDialog(null, "Bitte Besitzer eingeben");
                 if (owner == null) {
                     System.out.println("Sie müs2einen Namen angeben!");
                     continue;
