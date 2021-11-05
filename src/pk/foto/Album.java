@@ -1,7 +1,6 @@
 package pk.foto;
 
 public class Album extends Fachobjekt {
-    private String name;
     private String besitzer;
     Foto[] fotos = new Foto[2];
 
@@ -34,7 +33,7 @@ public class Album extends Fachobjekt {
     }
 
     public String toString() {
-        String x = String.format("Name: %s\nBesitzer: %s", name, besitzer);
+        String x = String.format("Name: %s\nBesitzer: %s", super.getName(), besitzer);
         int counter = 1;
         for (Foto foto : fotos)
             x += String.format("\n=== Foto %s ===\n%-4s", counter++, foto);
@@ -46,7 +45,4 @@ public class Album extends Fachobjekt {
         System.out.println(toString());
     }
 
-    public String getName() {
-        return this.name;
-    }
 }

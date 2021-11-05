@@ -17,4 +17,8 @@ public abstract class Fachobjekt {
     public String getID() {
         return id;
     }
+    
+    public String getName() {
+    	return name;
+    }
 }

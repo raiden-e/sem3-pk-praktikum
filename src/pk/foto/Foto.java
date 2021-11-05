@@ -3,7 +3,6 @@ package pk.foto;
 import java.time.LocalDateTime;
 
 public class Foto extends Fachobjekt {
-    private String name;
     private String dateiName;
     private FotoMetadaten metadaten;
 
@@ -19,6 +18,6 @@ public class Foto extends Fachobjekt {
     }
 
     public String toString() {
-        return String.format("Fotoname: %s\nDateiname: %s\n%s", name, dateiName, metadaten);
+        return String.format("Fotoname: %s\nDateiname: %s\n%s", super.getName(), dateiName, metadaten);
     }
 }
