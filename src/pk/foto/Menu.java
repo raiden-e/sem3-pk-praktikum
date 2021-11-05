@@ -1,7 +1,6 @@
 package pk.foto;
 
 import java.util.Scanner;
-import java.util.concurrent.ForkJoinTask;
 import java.time.LocalDateTime;
 
 import javax.swing.JOptionPane;
