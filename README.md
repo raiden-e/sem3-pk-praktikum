@@ -1,6 +1,11 @@
 # PK-Praktikum
 
-Semester 3 Programmierkurs Praktikum
+> Semester 3 Programmierkurs Praktikum
+
+## Authors
+
+- Herny Küfner
+- Raiden Erdmann
 
 ## JAVA Setup
 
@@ -21,7 +26,7 @@ Sometimes you need to `Add folder to Java Source Path`, by right-clicking inside
 
 Uninstall Maven and Java projectmgr extension
 
-clean workspaceP
+clean workspace
 
 ## Folder Structure
 

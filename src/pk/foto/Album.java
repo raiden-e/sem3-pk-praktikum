@@ -1,8 +1,8 @@
 package pk.foto;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class Album extends Fachobjekt {
     private String besitzer;
@@ -17,10 +17,10 @@ public class Album extends Fachobjekt {
         Iterator<Foto> iter = fotos.iterator();
         Foto[] rueckgabe = new Foto[fotos.size()];
         int zaehler = 0;
-        
-        while(iter.hasNext())
-        	rueckgabe[zaehler++] = iter.next();
-        
+
+        while (iter.hasNext())
+            rueckgabe[zaehler++] = iter.next();
+
         return rueckgabe;
     }
 
