@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Album extends Fachobjekt {
+public class Album extends Fachobjekt implements Comparable<Album>{
     private String besitzer;
     List<Foto> fotos = new ArrayList<>();
 
@@ -39,6 +39,19 @@ public class Album extends Fachobjekt {
 
     public void drucke() {
         System.out.println(toString());
+    }
+    
+    @Override
+    public int compareTo(Album o) {
+        if (this == o)
+            return 0;
+        if (o == null)
+            throw new NullPointerException();
+        if(super.getName() == null)
+            return o.getName() == null ? 0: -1;
+        if (o.getName() == null)
+            return 1;
+        return super.getName().compareTo(o.getName());
     }
 
 }

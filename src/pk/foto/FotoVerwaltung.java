@@ -1,10 +1,12 @@
 package pk.foto;
 
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.ArrayList;
 
 public class FotoVerwaltung {
-    LinkedList<Album> alben = new LinkedList<Album>();
+    HashSet<Album> alben = new HashSet<>();
 
     public void druckeAlleAlben() {
         Iterator<Album> iter = alben.iterator();
@@ -18,7 +20,6 @@ public class FotoVerwaltung {
     }
 
     public Album[] gibAlleAlben() {
-
         Album[] returner = new Album[alben.size()];
         Iterator<Album> iter = alben.iterator();
         for (int i = 0; i < alben.size(); i++)
@@ -29,6 +30,13 @@ public class FotoVerwaltung {
 
     public void addAlbum(Album album) {
         alben.add(album);
+        ArrayList<Album> list = new ArrayList<>();
+        for (Album x  : alben) 
+            list.add(x);
+        Collections.sort(list);
+        alben.clear();
+        for (Album x : list)
+            alben.add(x);
     }
 
     public Album findeAlbumMitName(String name) {
