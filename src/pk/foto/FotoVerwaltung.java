@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class FotoVerwaltung {
-
     LinkedList<Album> alben = new LinkedList<Album>();
 
     public void druckeAlleAlben() {

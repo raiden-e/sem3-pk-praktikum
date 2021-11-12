@@ -1,13 +1,11 @@
 package pk.foto;
 
-import java.util.Scanner;
-import java.util.concurrent.ForkJoinTask;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
 public class Menu {
-
     static FotoVerwaltung fotoverwaltung;
 
     public static void main(String[] args) {
