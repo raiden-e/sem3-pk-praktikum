@@ -27,4 +27,47 @@ public class FotoMetadaten {
                 kameraModell, dateText);
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + breite;
+        result = prime * result + ((erstellungszeitpunkt == null) ? 0 : erstellungszeitpunkt.hashCode());
+        result = prime * result + hoehe;
+        result = prime * result + ((kameraMarke == null) ? 0 : kameraMarke.hashCode());
+        result = prime * result + ((kameraModell == null) ? 0 : kameraModell.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FotoMetadaten other = (FotoMetadaten) obj;
+        if (breite != other.breite)
+            return false;
+        if (erstellungszeitpunkt == null) {
+            if (other.erstellungszeitpunkt != null)
+                return false;
+        } else if (!erstellungszeitpunkt.equals(other.erstellungszeitpunkt))
+            return false;
+        if (hoehe != other.hoehe)
+            return false;
+        if (kameraMarke == null) {
+            if (other.kameraMarke != null)
+                return false;
+        } else if (!kameraMarke.equals(other.kameraMarke))
+            return false;
+        if (kameraModell == null) {
+            if (other.kameraModell != null)
+                return false;
+        } else if (!kameraModell.equals(other.kameraModell))
+            return false;
+        return true;
+    }
+
 }
