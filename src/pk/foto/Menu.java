@@ -31,7 +31,7 @@ public class Menu {
                 }
                 String owner = JOptionPane.showInputDialog(null, "Bitte Besitzer eingeben");
                 if (owner == null) {
-                    System.out.println("Sie müs2einen Namen angeben!");
+                    System.out.println("Sie müssen einen Namen angeben!");
                     continue;
                 }
                 Album alb = new Album(name, owner);
