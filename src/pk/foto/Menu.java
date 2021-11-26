@@ -57,7 +57,8 @@ public class Menu {
                         fotoverwaltung
                                 .findeAlbumMitName(JOptionPane.showInputDialog(null, "Bitte gesuchten Namen eingeben"));
                     else
-                        throw new UngueltigeMenueAuswahlException("Bitte geben Sie einen gültigen numerischen Wert an.");
+                        throw new UngueltigeMenueAuswahlException(
+                                "Bitte geben Sie einen gültigen numerischen Wert an.");
                 } catch (UngueltigeMenueAuswahlException e) {
                     System.out.println(e.getMessage());
                     input = -1;
