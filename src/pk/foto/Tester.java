@@ -2,8 +2,10 @@ package pk.foto;
 
 import java.time.LocalDateTime;
 
+import pk.exceptions.AlbumVorhandenException;
+
 public class Tester {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AlbumVorhandenException {
         FotoVerwaltung fotoverwaltung1 = new FotoVerwaltung();
         Album album1 = new Album("Album1", "Dieter");
         album1.addFoto(new Foto("Foto1", "Hausaufgaben", 1234, 456, "Sony", "ModelX", LocalDateTime.now()));

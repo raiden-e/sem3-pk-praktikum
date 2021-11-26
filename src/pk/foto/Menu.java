@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import pk.exceptions.AlbumVorhandenException;
 import pk.exceptions.UngueltigeMenueAuswahlException;
 
 public class Menu {
@@ -26,42 +27,19 @@ public class Menu {
                 System.out.println(menu);
                 try {
                     input = sc.nextInt();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    input = -1;
-                    sc.nextLine();
-                }
-                try {
                     if (input == 1) {
-                        String name = JOptionPane.showInputDialog(null, "Bitte Namen eingeben");
-                        if (name == null) {
-                            System.out.println("Sie müssen einen Namen angeben!");
-                            continue;
-                        }
-                        String owner = JOptionPane.showInputDialog(null, "Bitte Besitzer eingeben");
-                        if (owner == null) {
-                            System.out.println("Sie müssen einen Namen angeben!");
-                            continue;
-                        }
-                        Album alb = new Album(name, owner);
-                        while (JOptionPane.showConfirmDialog(null, "Foto hinzufügen?", "Foto hinzufügen",
-                                JOptionPane.YES_NO_OPTION) == 0) {
-                            String name1 = JOptionPane.showInputDialog(null, "Bitte Namen eingeben");
-                            alb.addFoto(new Foto(name1, name1 + ".jpg", 1920, 1080, "Sony", "alpha x1",
-                                    LocalDateTime.now()));
-                        }
-                        fotoverwaltung.addAlbum(alb);
+                        menuAddAlbum();
                     } else if (input == 2)
                         fotoverwaltung.druckeAlleAlben();
-                    else if (input == 3)
-                        fotoverwaltung
-                                .findeAlbumMitName(JOptionPane.showInputDialog(null, "Bitte gesuchten Namen eingeben"));
-                    else
-                        throw new UngueltigeMenueAuswahlException(
-                                "Bitte geben Sie einen gültigen numerischen Wert an.");
+                    else if (input == 3) {
+                        menuPrintAlbumByName();
+                    } else if (input != 4)
+                        throw new UngueltigeMenueAuswahlException("Die Zahl muss 1,2,3 oder 4 sein.");
+                } catch (java.util.InputMismatchException e) {
+                    sc.nextLine();
+                    System.out.println("Bitte geben Sie einen gültigen numerischen Wert an.");
                 } catch (UngueltigeMenueAuswahlException e) {
                     System.out.println(e.getMessage());
-                    input = -1;
                 }
             }
         } catch (Exception e) {
@@ -69,6 +47,36 @@ public class Menu {
         } finally {
             sc.close();
         }
+    }
+
+    private static void menuPrintAlbumByName() {
+        String inp = JOptionPane.showInputDialog(null, "Bitte gesuchten Namen eingeben");
+        System.out.println(fotoverwaltung.findeAlbumMitName(inp));
+    }
+
+    private static void menuAddAlbum() {
+        String name = getInput("Namen");
+        String owner = getInput("Besitzer");
+        Album alb = new Album(name, owner);
+        while (JOptionPane.showConfirmDialog(null, "Foto hinzufügen?", "Foto hinzufügen",
+                JOptionPane.YES_NO_OPTION) == 0) {
+            String name1 = getInput("Namen");
+            alb.addFoto(new Foto(name1, name1 + ".jpg", 1920, 1080, "Sony", "alpha x1", LocalDateTime.now()));
+        }
+        try {
+            fotoverwaltung.addAlbum(alb);
+        } catch (AlbumVorhandenException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private static String getInput(String param) {
+        String obj = JOptionPane.showInputDialog(null, String.format("Bitte %s eingeben", param));
+        while (obj == null || obj.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, String.format("Sie müssen einen %s angeben!", param), "Alert", JOptionPane.WARNING_MESSAGE);
+            obj = JOptionPane.showInputDialog(null, String.format("Bitte %s eingeben", param));
+        }
+        return obj;
     }
 
 }

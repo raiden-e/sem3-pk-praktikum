@@ -3,6 +3,8 @@ package pk.foto;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import pk.exceptions.AlbumVorhandenException;
+
 public class FotoVerwaltung {
     TreeSet<Album> alben = new TreeSet<>();
 
@@ -26,7 +28,9 @@ public class FotoVerwaltung {
         return returner;
     }
 
-    public void addAlbum(Album album) {
+    public void addAlbum(Album album) throws AlbumVorhandenException {
+        if (findeAlbumMitName(album.getName()) != null)
+            throw new AlbumVorhandenException("Der Name ist vergeben, bitte vesuchen Sie es erneut.");
         alben.add(album);
     }
 
@@ -35,7 +39,7 @@ public class FotoVerwaltung {
         Album temp;
         while (iter.hasNext()) {
             temp = iter.next();
-            if (temp.getName() == name)
+            if (temp.getName().equals(name))
                 return temp;
         }
         return null;
