@@ -10,7 +10,7 @@ public class FotoVerwaltung {
         Iterator<Album> iter = alben.iterator();
         int i = 1;
         while (iter.hasNext())
-            System.out.print(String.format("\n=== Album %s ===\n%s", i++, iter.next()));
+            System.out.println(String.format("\n=== Album %s ===\n%s", i++, iter.next()));
     }
 
     public int gibAnzahlAlben() {
