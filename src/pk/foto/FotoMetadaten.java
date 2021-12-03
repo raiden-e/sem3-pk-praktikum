@@ -3,7 +3,9 @@ package pk.foto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class FotoMetadaten {
+import pk.interfaces.CsvExportable;
+
+public class FotoMetadaten implements CsvExportable{
     private int breite;
     private int hoehe;
     private String kameraMarke;
@@ -18,13 +20,27 @@ public class FotoMetadaten {
         this.kameraModell = pkameraModell;
         this.erstellungszeitpunkt = perstellungszeitpunkt;
     }
+    
+    private String getDateText() {
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY HH:mm:ss");
+        return erstellungszeitpunkt.format(date);
+    }
 
     public String toString() {
-        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY HH:mm:ss");
-        String dateText = erstellungszeitpunkt.format(date);
+        
 
         return String.format("Groesse: %s x %s\nKamera: %s - %s\nErstellungsdatum: %s", hoehe, breite, kameraMarke,
-                kameraModell, dateText);
+                kameraModell, this.getDateText());
+    }
+    
+    public String exportiereAlsCsv() {
+        StringBuilder sb =new StringBuilder();
+        sb.append(breite).append(",");
+        sb.append(hoehe).append(",");
+        sb.append(kameraMarke).append(",");
+        sb.append(kameraModell).append(",");
+        sb.append(this.getDateText()).toString();
+        return sb.toString();
     }
 
     @Override

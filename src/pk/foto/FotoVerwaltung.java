@@ -3,6 +3,12 @@ package pk.foto;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import javax.swing.JOptionPane;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 import pk.exceptions.AlbumVorhandenException;
 
 public class FotoVerwaltung {
@@ -44,4 +50,22 @@ public class FotoVerwaltung {
         }
         return null;
     }
+    
+    public void exportiereEintraegeAlsCsv(File datei) throws IOException{
+        try {
+            StringBuilder input = new StringBuilder();
+            for (Album album : alben) {
+                input.append(album.exportiereAlsCsv());
+            }
+            Files.writeString(datei.toPath(), input);
+        }
+        catch (IOException e){
+            System.err.println("Fehler beim Schreiben der Datei");
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Fehler bei Export", "ERROR",
+                    JOptionPane.INFORMATION_MESSAGE);
+            throw e;
+        }
+    }
 }
+

@@ -20,6 +20,10 @@ public class Foto extends Fachobjekt {
     public String toString() {
         return String.format("Fotoname: %s\nDateiname: %s\n%s\n", super.getName(), dateiName, metadaten);
     }
+    
+    public String exportiereAlsCsv() {
+        return new StringBuilder(super.exportiereAlsCsv()).append(",").append(dateiName).append("\n").append(metadaten.exportiereAlsCsv()).append("\n").toString();
+    }
 
     @Override
     public int hashCode() {

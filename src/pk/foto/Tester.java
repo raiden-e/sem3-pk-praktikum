@@ -1,11 +1,13 @@
 package pk.foto;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 import pk.exceptions.AlbumVorhandenException;
 
 public class Tester {
-    public static void main(String[] args) throws AlbumVorhandenException {
+    public static void main(String[] args) throws AlbumVorhandenException, IOException {
         FotoVerwaltung fotoverwaltung1 = new FotoVerwaltung();
         Album album1 = new Album("Album1", "Dieter");
         album1.addFoto(new Foto("Foto1", "Hausaufgaben", 1234, 456, "Sony", "ModelX", LocalDateTime.now()));
@@ -19,5 +21,8 @@ public class Tester {
         fotoverwaltung1.addAlbum(album2);
 
         fotoverwaltung1.druckeAlleAlben();
+        
+        File datei1 = new File("datei1");
+        fotoverwaltung1.exportiereEintraegeAlsCsv(datei1);
     }
 }

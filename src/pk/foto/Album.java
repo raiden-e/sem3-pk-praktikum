@@ -41,6 +41,13 @@ public class Album extends Fachobjekt implements Comparable<Album>{
         System.out.println(toString());
     }
     
+    public String exportiereAlsCsv() {
+        StringBuilder sb = new StringBuilder(super.exportiereAlsCsv()).append(",").append(besitzer).append("\n");
+        for (Foto foto : fotos) 
+            sb.append(foto.exportiereAlsCsv());
+        return sb.toString();
+    }
+    
     @Override
     public int compareTo(Album o) {
         if (this == o)

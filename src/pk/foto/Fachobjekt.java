@@ -3,7 +3,9 @@ package pk.foto;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Fachobjekt {
+import pk.interfaces.CsvExportable;
+
+public abstract class Fachobjekt implements CsvExportable{
     private final String id = UUID.randomUUID().toString();
     private String name;
 
@@ -21,6 +23,10 @@ public abstract class Fachobjekt {
 
     public String getName() {
         return name;
+    }
+    
+    public String exportiereAlsCsv() {
+        return new StringBuilder(this.getID()).append(",").append(this.getName()).toString();
     }
 
     @Override
@@ -43,5 +49,7 @@ public abstract class Fachobjekt {
         Fachobjekt other = (Fachobjekt) obj;
         return Objects.equals(id, other.id) && Objects.equals(name, other.name);
     }
+    
+    
 
 }
