@@ -50,16 +50,18 @@ public class FotoVerwaltung {
         }
         return null;
     }
-    
-    public void exportiereEintraegeAlsCsv(File datei) throws IOException{
+
+    public void exportiereEintraegeAlsCsv(File datei) throws IOException {
+        var d = datei.getName();
+        if (!d.substring(d.length() - 4, d.length()).equals(".csv"))
+            datei = new File(datei.getParentFile(), d + ".csv");
         try {
             StringBuilder input = new StringBuilder();
-            for (Album album : alben) {
+            for (Album album : alben)
                 input.append(album.exportiereAlsCsv());
-            }
+
             Files.writeString(datei.toPath(), input);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.err.println("Fehler beim Schreiben der Datei");
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Fehler bei Export", "ERROR",
@@ -68,4 +70,3 @@ public class FotoVerwaltung {
         }
     }
 }
-
