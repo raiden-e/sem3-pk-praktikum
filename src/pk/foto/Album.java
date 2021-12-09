@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Album extends Fachobjekt implements Comparable<Album>{
+public class Album extends Fachobjekt implements Comparable<Album> {
     private String besitzer;
     List<Foto> fotos = new ArrayList<>();
 
@@ -40,22 +40,22 @@ public class Album extends Fachobjekt implements Comparable<Album>{
     public void drucke() {
         System.out.println(toString());
     }
-    
+
     public String exportiereAlsCsv() {
         StringBuilder sb = new StringBuilder(super.exportiereAlsCsv()).append(",").append(besitzer).append("\n");
-        for (Foto foto : fotos) 
+        for (Foto foto : fotos)
             sb.append(foto.exportiereAlsCsv());
         return sb.toString();
     }
-    
+
     @Override
     public int compareTo(Album o) {
         if (this == o)
             return 0;
         if (o == null)
             throw new NullPointerException();
-        if(super.getName() == null)
-            return o.getName() == null ? 0: -1;
+        if (super.getName() == null)
+            return o.getName() == null ? 0 : -1;
         if (o.getName() == null)
             return 1;
         return super.getName().compareTo(o.getName());

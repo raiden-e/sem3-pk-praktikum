@@ -21,7 +21,7 @@ public class Tester {
         fotoverwaltung1.addAlbum(album2);
 
         fotoverwaltung1.druckeAlleAlben();
-        
+
         File datei1 = new File("datei1");
         fotoverwaltung1.exportiereEintraegeAlsCsv(datei1);
     }

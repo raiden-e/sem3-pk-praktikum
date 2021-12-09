@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import pk.interfaces.CsvExportable;
 
-public abstract class Fachobjekt implements CsvExportable{
+public abstract class Fachobjekt implements CsvExportable {
     private final String id = UUID.randomUUID().toString();
     private String name;
 
@@ -24,7 +24,7 @@ public abstract class Fachobjekt implements CsvExportable{
     public String getName() {
         return name;
     }
-    
+
     public String exportiereAlsCsv() {
         return new StringBuilder(this.getID()).append(",").append(this.getName()).toString();
     }
@@ -49,7 +49,5 @@ public abstract class Fachobjekt implements CsvExportable{
         Fachobjekt other = (Fachobjekt) obj;
         return Objects.equals(id, other.id) && Objects.equals(name, other.name);
     }
-    
-    
 
 }

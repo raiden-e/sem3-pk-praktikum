@@ -84,7 +84,7 @@ public class Menu {
         }
         return obj;
     }
-    
+
     private static void exportiereCsv() {
         boolean checks = false;
         File f = new File("");
@@ -99,16 +99,15 @@ public class Menu {
             }
             f = new File(inp);
             if (f.exists())
-                checks = 0 == JOptionPane.showConfirmDialog(null, "Datei existiert bereits. Soll die Datei überschrieben werden?", "Datei existiert bereits",
+                checks = 0 == JOptionPane.showConfirmDialog(null,
+                        "Datei existiert bereits. Soll die Datei überschrieben werden?",
+                        "Datei existiert bereits",
                         JOptionPane.YES_NO_OPTION);
         }
         try {
             fotoverwaltung.exportiereEintraegeAlsCsv(f);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        
     }
-
 }
