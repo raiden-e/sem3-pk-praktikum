@@ -18,16 +18,16 @@ import com.drew.metadata.jpeg.JpegDirectory;
 import pk.foto.FotoMetadaten;
 
 public abstract class FotoUtil {
-	public static FotoMetadaten readMetadata(File photoFile)
-			throws ImageProcessingException, IOException, MetadataException, NullPointerException {
-		Metadata metadata = ImageMetadataReader.readMetadata(photoFile);
-		Directory jpgDir = metadata.getFirstDirectoryOfType(JpegDirectory.class);
-		Directory exifIfd0 = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
-		Date date = exifIfd0.getDate(ExifIFD0Directory.TAG_DATETIME, TimeZone.getDefault());
+    public static FotoMetadaten readMetadata(File photoFile)
+            throws ImageProcessingException, IOException, MetadataException, NullPointerException {
+        Metadata metadata = ImageMetadataReader.readMetadata(photoFile);
+        Directory jpgDir = metadata.getFirstDirectoryOfType(JpegDirectory.class);
+        Directory exifIfd0 = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+        Date date = exifIfd0.getDate(ExifIFD0Directory.TAG_DATETIME, TimeZone.getDefault());
 
-		return new FotoMetadaten(jpgDir.getInt(JpegDirectory.TAG_IMAGE_WIDTH),
-				jpgDir.getInt(JpegDirectory.TAG_IMAGE_HEIGHT), exifIfd0.getString(ExifIFD0Directory.TAG_MAKE),
-				exifIfd0.getString(ExifIFD0Directory.TAG_MODEL),
-				LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()));
-	}
+        return new FotoMetadaten(jpgDir.getInt(JpegDirectory.TAG_IMAGE_WIDTH),
+                jpgDir.getInt(JpegDirectory.TAG_IMAGE_HEIGHT), exifIfd0.getString(ExifIFD0Directory.TAG_MAKE),
+                exifIfd0.getString(ExifIFD0Directory.TAG_MODEL),
+                LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()));
+    }
 }

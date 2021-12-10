@@ -35,15 +35,14 @@ public class Album extends Fachobjekt implements Comparable<Album> {
     public void addFoto(Foto foto) {
         fotos.add(foto);
     }
-    
-    public void addFoto(File file) throws FotoMetadatenException{
+
+    public void addFoto(File file) throws FotoMetadatenException {
         try {
             var meta = FotoUtil.readMetadata(file);
             System.out.println(meta);
             Foto foto1 = new Foto(file.getPath(), file.getPath(), meta);
             this.addFoto(foto1);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new FotoMetadatenException(e.getMessage());
         }
     }

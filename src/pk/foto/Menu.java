@@ -13,7 +13,7 @@ import pk.exceptions.UngueltigeMenueAuswahlException;
 
 public class Menu {
     static FotoVerwaltung fotoverwaltung;
-    static String imgPath = new File(".","images").toString();
+    static String imgPath = new File(".", "images").toString();
 
     public static void main(String[] args) throws Exception {
         fotoverwaltung = new FotoVerwaltung();
@@ -70,7 +70,7 @@ public class Menu {
                 JOptionPane.YES_NO_OPTION) == 0) {
             String name1 = getInput("Namen", true);
             try {
-                alb.addFoto(new File(imgPath, name1));
+                alb.addFoto(new File(name1));
             } catch (FotoMetadatenException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -92,13 +92,13 @@ public class Menu {
         }
         return obj;
     }
-    
+
     private static String getInput(String param, boolean exists) {
-        File f = new File(imgPath,getInput(param));
-        while(!f.exists() || f.isDirectory()) {
+        File f = new File(imgPath, getInput(param));
+        while (!f.exists() || f.isDirectory()) {
             JOptionPane.showMessageDialog(null, "Die Datei existiert nicht!", "Error", JOptionPane.ERROR_MESSAGE);
             param = JOptionPane.showInputDialog(null, "Bitte Name eingeben");
-            f = new File(imgPath,getInput(param));
+            f = new File(imgPath, getInput(param));
         }
         return f.toString();
     }
