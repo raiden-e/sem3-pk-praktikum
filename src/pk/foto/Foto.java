@@ -12,6 +12,12 @@ public class Foto extends Fachobjekt {
         this.dateiName = dateiName;
         metadaten = new FotoMetadaten(breite, hoehe, kameraMarke, kameraModell, erstellungszeitpunkt);
     }
+    
+    public Foto(String name, String dateiName, FotoMetadaten meta) {
+        super(name);
+        this.dateiName = dateiName;
+        metadaten = meta;
+    }
 
     public void drucke() {
         System.out.println(toString());

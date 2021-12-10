@@ -1,8 +1,16 @@
 package pk.foto;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.MetadataException;
+
+import pk.exceptions.FotoMetadatenException;
+import pk.foto.util.FotoUtil;
 
 public class Album extends Fachobjekt implements Comparable<Album>{
     private String besitzer;
@@ -26,6 +34,18 @@ public class Album extends Fachobjekt implements Comparable<Album>{
 
     public void addFoto(Foto foto) {
         fotos.add(foto);
+    }
+    
+    public void addFoto(File file) throws FotoMetadatenException{
+        try {
+            var meta = FotoUtil.readMetadata(file);
+            System.out.println(meta);
+            Foto foto1 = new Foto(file.getPath(), file.getPath(), meta);
+            this.addFoto(foto1);
+        }
+        catch (Exception e) {
+            throw new FotoMetadatenException(e.getMessage());
+        }
     }
 
     public String toString() {

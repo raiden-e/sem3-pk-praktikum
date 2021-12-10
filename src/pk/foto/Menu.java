@@ -8,10 +8,12 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import pk.exceptions.AlbumVorhandenException;
+import pk.exceptions.FotoMetadatenException;
 import pk.exceptions.UngueltigeMenueAuswahlException;
 
 public class Menu {
     static FotoVerwaltung fotoverwaltung;
+    static String imgPath = new File(".","images").toString();
 
     public static void main(String[] args) throws Exception {
         fotoverwaltung = new FotoVerwaltung();
@@ -23,7 +25,8 @@ public class Menu {
         menu += "\t3. Drucke Album mit Name\n";
         menu += "\t4. CSV-Export\n";
         menu += "\t5. Beenden\n\n";
-        menu += "Bitte Aktion wählen:";
+        menu += new java.io.File(".").getCanonicalPath();
+        menu += "\nBitte Aktion wählen:";
 
         try {
             while (input != 5) {
@@ -65,8 +68,13 @@ public class Menu {
         Album alb = new Album(name, owner);
         while (JOptionPane.showConfirmDialog(null, "Foto hinzufügen?", "Foto hinzufügen",
                 JOptionPane.YES_NO_OPTION) == 0) {
-            String name1 = getInput("Namen");
-            alb.addFoto(new Foto(name1, name1 + ".jpg", 1920, 1080, "Sony", "alpha x1", LocalDateTime.now()));
+            String name1 = getInput("Namen", true);
+            try {
+                alb.addFoto(new File(imgPath, name1));
+            } catch (FotoMetadatenException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
         try {
             fotoverwaltung.addAlbum(alb);
@@ -85,6 +93,16 @@ public class Menu {
         return obj;
     }
     
+    private static String getInput(String param, boolean exists) {
+        File f = new File(imgPath,getInput(param));
+        while(!f.exists() || f.isDirectory()) {
+            JOptionPane.showMessageDialog(null, "Die Datei existiert nicht!", "Error", JOptionPane.ERROR_MESSAGE);
+            param = JOptionPane.showInputDialog(null, "Bitte Name eingeben");
+            f = new File(imgPath,getInput(param));
+        }
+        return f.toString();
+    }
+
     private static void exportiereCsv() {
         boolean checks = false;
         File f = new File("");
@@ -99,16 +117,16 @@ public class Menu {
             }
             f = new File(inp);
             if (f.exists())
-                checks = 0 == JOptionPane.showConfirmDialog(null, "Datei existiert bereits. Soll die Datei überschrieben werden?", "Datei existiert bereits",
+                checks = 0 == JOptionPane.showConfirmDialog(null,
+                        "Datei existiert bereits. Soll die Datei überschrieben werden?", "Datei existiert bereits",
                         JOptionPane.YES_NO_OPTION);
         }
         try {
             fotoverwaltung.exportiereEintraegeAlsCsv(f);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 
 }

@@ -4,12 +4,20 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.MetadataException;
+
 import pk.exceptions.AlbumVorhandenException;
+import pk.exceptions.FotoMetadatenException;
 
 public class Tester {
-    public static void main(String[] args) throws AlbumVorhandenException, IOException {
+    public static void main(String[] args) throws AlbumVorhandenException, IOException, ImageProcessingException, MetadataException, NullPointerException, FotoMetadatenException {
         FotoVerwaltung fotoverwaltung1 = new FotoVerwaltung();
+        
+        File file1 = new File("images/DSC02033.jpg");
+        System.out.println(file1);
         Album album1 = new Album("Album1", "Dieter");
+        album1.addFoto(file1);
         album1.addFoto(new Foto("Foto1", "Hausaufgaben", 1234, 456, "Sony", "ModelX", LocalDateTime.now()));
         album1.addFoto(new Foto("Foto2", "Arbeit", 9866, 2738, "Sony", "ModelX", LocalDateTime.now()));
 
