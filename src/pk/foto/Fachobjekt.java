@@ -1,5 +1,7 @@
 package pk.foto;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -14,6 +16,8 @@ public abstract class Fachobjekt implements CsvExportable {
     }
 
     public abstract void drucke();
+    
+    public abstract void drucke (OutputStream stream) throws IOException;
 
     public abstract String toString();
 

@@ -1,5 +1,8 @@
 package pk.foto;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.time.LocalDateTime;
 
 public class Foto extends Fachobjekt {
@@ -19,6 +22,12 @@ public class Foto extends Fachobjekt {
         metadaten = meta;
     }
 
+    public void drucke(OutputStream stream) throws IOException {
+        OutputStreamWriter sw = new OutputStreamWriter(stream);
+        sw.write(toString());
+        sw.flush();
+    }
+    
     public void drucke() {
         System.out.println(toString());
     }

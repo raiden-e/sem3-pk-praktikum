@@ -6,7 +6,10 @@ import java.util.TreeSet;
 import javax.swing.JOptionPane;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 
 import pk.exceptions.AlbumVorhandenException;
@@ -55,6 +58,20 @@ public class FotoVerwaltung {
         var d = datei.getName();
         if (!d.substring(d.length() - 4, d.length()).equals(".csv"))
             datei = new File(datei.getParentFile(), d + ".csv");
+        try (FileWriter fw = new FileWriter(datei); PrintWriter pw = new PrintWriter(fw)) {
+            StringBuilder input = new StringBuilder();
+            for (Album album : alben)
+                input.append(album.exportiereAlsCsv());
+
+            pw.println(input);
+        }
+
+    }
+
+    public void exportiereEintraegeAlsCsvNio(File datei) throws IOException {
+        var d = datei.getName();
+        if (!d.substring(d.length() - 4, d.length()).equals(".csv"))
+            datei = new File(datei.getParentFile(), d + ".csv");
         try {
             StringBuilder input = new StringBuilder();
             for (Album album : alben)
@@ -64,8 +81,7 @@ public class FotoVerwaltung {
         } catch (IOException e) {
             System.err.println("Fehler beim Schreiben der Datei");
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Fehler bei Export", "ERROR",
-                    JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Fehler bei Export", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             throw e;
         }
     }

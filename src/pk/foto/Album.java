@@ -2,6 +2,8 @@ package pk.foto;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -56,6 +58,12 @@ public class Album extends Fachobjekt implements Comparable<Album> {
         return x;
     }
 
+    public void drucke(OutputStream stream) throws IOException {
+        OutputStreamWriter sw = new OutputStreamWriter(stream);
+        sw.write(toString());
+        sw.flush();
+    }
+    
     public void drucke() {
         System.out.println(toString());
     }
