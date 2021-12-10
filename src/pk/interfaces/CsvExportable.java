@@ -1,9 +1,5 @@
 package pk.interfaces;
 
 public interface CsvExportable {
-
-    public String exportiereAlsCsv ();
-        
-    
-   
+    public String exportiereAlsCsv();
 }

@@ -118,7 +118,8 @@ public class Menu {
             f = new File(inp);
             if (f.exists())
                 checks = 0 == JOptionPane.showConfirmDialog(null,
-                        "Datei existiert bereits. Soll die Datei überschrieben werden?", "Datei existiert bereits",
+                        "Datei existiert bereits. Soll die Datei überschrieben werden?",
+                        "Datei existiert bereits",
                         JOptionPane.YES_NO_OPTION);
         }
         try {
@@ -126,7 +127,5 @@ public class Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }
