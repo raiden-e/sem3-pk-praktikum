@@ -2,7 +2,6 @@ package pk.foto;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -24,12 +23,14 @@ public class Menu {
         menu += "\t2. Drucke alle Alben\n";
         menu += "\t3. Drucke Album mit Name\n";
         menu += "\t4. CSV-Export\n";
-        menu += "\t5. Beenden\n\n";
+        menu += "\t5. Lade aus Datei\n\n";
+        menu += "\t6. Speichere in Datei\n\n";
+        menu += "\t7. Beenden\n\n";
         menu += new java.io.File(".").getCanonicalPath();
         menu += "\nBitte Aktion wählen:";
 
         try {
-            while (input != 5) {
+            while (input != 7) {
                 System.out.println(menu);
                 try {
                     input = sc.nextInt();
@@ -41,7 +42,11 @@ public class Menu {
                         menuPrintAlbumByName();
                     else if (input == 4)
                         exportiereCsv();
-                    else if (input != 5)
+                    else if (input == 5)
+                        fotoverwaltung.laden();
+                    else if (input == 6)
+                        fotoverwaltung.speichern();
+                    else if (input != 7)
                         throw new UngueltigeMenueAuswahlException("Die Zahl muss von 1 bis 5 sein.");
                 } catch (java.util.InputMismatchException e) {
                     sc.nextLine();

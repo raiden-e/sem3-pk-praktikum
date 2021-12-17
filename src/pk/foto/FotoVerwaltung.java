@@ -6,12 +6,14 @@ import java.util.TreeSet;
 import javax.swing.JOptionPane;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-
 import pk.exceptions.AlbumVorhandenException;
 
 public class FotoVerwaltung {
@@ -33,7 +35,6 @@ public class FotoVerwaltung {
         Iterator<Album> iter = alben.iterator();
         for (int i = 0; i < alben.size(); i++)
             returner[i] = iter.next();
-
         return returner;
     }
 
@@ -62,10 +63,8 @@ public class FotoVerwaltung {
             StringBuilder input = new StringBuilder();
             for (Album album : alben)
                 input.append(album.exportiereAlsCsv());
-
             pw.println(input);
         }
-
     }
 
     public void exportiereEintraegeAlsCsvNio(File datei) throws IOException {
@@ -85,4 +84,31 @@ public class FotoVerwaltung {
             throw e;
         }
     }
+
+    public void importEintrargevonCSV(File datei) throws IOException {
+        var d = datei.getName();
+        if (!d.substring(d.length() - 4, d.length()).equals(".csv"))
+            datei = new File(datei.getParentFile(), d + ".csv");
+
+    }
+
+    public void laden() {
+        File file = new File("test.ser");
+        try (FileInputStream fis = new FileInputStream(file);
+                ObjectInputStream ois = new ObjectInputStream(fis)) {
+            this.alben = (TreeSet<Album>)ois.readObject();
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void speichern() throws IOException {
+        File file = new File("Fotos.dat");
+        try (FileOutputStream fos = new FileOutputStream(file); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(alben); // TreeSet ist serializable :)
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
