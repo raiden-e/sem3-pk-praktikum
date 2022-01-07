@@ -5,13 +5,15 @@ import java.io.IOException;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.MetadataException;
 
+import javafx.stage.Stage;
 import pk.exceptions.AlbumVorhandenException;
 import pk.exceptions.FotoMetadatenException;
+import pk.foto.ui.AlbumErfassungView;
 
 public class Tester {
     public static void main(String[] args) throws AlbumVorhandenException, IOException, ImageProcessingException,
             MetadataException, NullPointerException, FotoMetadatenException {
-        FotoVerwaltung fotoverwaltung1 = new FotoVerwaltung();
+        //FotoVerwaltung fotoverwaltung1 = new FotoVerwaltung();
 
         // File file1 = new File("images/DSC02033.jpg");
         // System.out.println(file1);
@@ -36,7 +38,10 @@ public class Tester {
         // File datei1 = new File("datei1");
         // fotoverwaltung1.exportiereEintraegeAlsCsv(datei1);
 
-        fotoverwaltung1.laden();
-        fotoverwaltung1.druckeAlleAlben();
+        /*fotoverwaltung1.laden();
+        fotoverwaltung1.druckeAlleAlben();*/
+        
+        Stage stage = new Stage();
+        var albumerfassungview1 = new AlbumErfassungView(stage);
     }
 }
