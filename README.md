@@ -44,3 +44,45 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+# Adding external classes
+
+To add external classes such as `xmpcore.jar` or `metadata-extractor-2.16.0.jar`, you have to copy the `.jar` files into `lib` and create `.classpath` manually:
+
+```xml
+<!-- .classpath -->
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="src"/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+        <attributes>
+            <attribute name="module" value="true"/>
+        </attributes>
+    </classpathentry>
+    <classpathentry kind="lib" path="lib/metadata-extractor-2.16.0.jar">
+        <attributes>
+            <attribute name="module" value="true"/>
+        </attributes>
+    </classpathentry>
+    <classpathentry kind="lib" path="lib/xmpcore-6.1.11.jar">
+        <attributes>
+            <attribute name="module" value="true"/>
+        </attributes>
+    </classpathentry>
+</classpath>
+```
+
+You may also want to create `.vscode/settings.json`:
+```json
+// settings.json
+{
+    "java.project.sourcePaths": [
+        "src",
+        "lib",
+        ""
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ],
+}
+```
