@@ -1,11 +1,13 @@
 package pk.foto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import pk.interfaces.CsvExportable;
 
-public class FotoMetadaten implements CsvExportable {
+public class FotoMetadaten implements CsvExportable, Serializable {
+    private static final long serialVersionUID = 1L;
     private int breite;
     private int hoehe;
     private String kameraMarke;

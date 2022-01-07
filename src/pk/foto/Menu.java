@@ -23,8 +23,8 @@ public class Menu {
         menu += "\t2. Drucke alle Alben\n";
         menu += "\t3. Drucke Album mit Name\n";
         menu += "\t4. CSV-Export\n";
-        menu += "\t5. Lade aus Datei\n\n";
-        menu += "\t6. Speichere in Datei\n\n";
+        menu += "\t5. Lade aus Datei\n";
+        menu += "\t6. Speichere in Datei\n";
         menu += "\t7. Beenden\n\n";
         menu += new java.io.File(".").getCanonicalPath();
         menu += "\nBitte Aktion wählen:";

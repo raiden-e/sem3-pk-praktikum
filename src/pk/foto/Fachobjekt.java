@@ -2,12 +2,14 @@ package pk.foto;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 import pk.interfaces.CsvExportable;
 
-public abstract class Fachobjekt implements CsvExportable {
+public abstract class Fachobjekt implements CsvExportable, Serializable {
+    private static final long serialVersionUID = 1L;
     private final String id = UUID.randomUUID().toString();
     private String name;
 
@@ -16,8 +18,8 @@ public abstract class Fachobjekt implements CsvExportable {
     }
 
     public abstract void drucke();
-    
-    public abstract void drucke (OutputStream stream) throws IOException;
+
+    public abstract void drucke(OutputStream stream) throws IOException;
 
     public abstract String toString();
 

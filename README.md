@@ -9,6 +9,8 @@
 
 ## JAVA Setup
 
+> VSCode is difficult to set up, especially when trying to include libraries
+
 Download [JDK 15.0.1](https://download.oracle.com/otn/java/jdk/15.0.1%2B9/51f4f36ad4ef43e39d0dfdbaf6549e32/jdk-15.0.1_windows-x64_bin.exe)
 
 Install [VS Code][1] and [Java Extension Pack][2]

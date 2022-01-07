@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.time.LocalDateTime;
 
 public class Foto extends Fachobjekt {
+    private static final long serialVersionUID = 1L;
     private String dateiName;
     private FotoMetadaten metadaten;
 
@@ -27,7 +28,7 @@ public class Foto extends Fachobjekt {
         sw.write(toString());
         sw.flush();
     }
-    
+
     public void drucke() {
         System.out.println(toString());
     }

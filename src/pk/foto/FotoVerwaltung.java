@@ -93,10 +93,10 @@ public class FotoVerwaltung {
     }
 
     public void laden() {
-        File file = new File("test.ser");
+        File file = new File("Fotos.dat");
         try (FileInputStream fis = new FileInputStream(file);
                 ObjectInputStream ois = new ObjectInputStream(fis)) {
-            this.alben = (TreeSet<Album>)ois.readObject();
+            this.alben = (TreeSet<Album>) ois.readObject();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }

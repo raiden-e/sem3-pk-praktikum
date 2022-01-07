@@ -8,13 +8,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.drew.imaging.ImageProcessingException;
-import com.drew.metadata.MetadataException;
-
 import pk.exceptions.FotoMetadatenException;
 import pk.foto.util.FotoUtil;
 
 public class Album extends Fachobjekt implements Comparable<Album> {
+    private static final long serialVersionUID = 1L;
     private String besitzer;
     List<Foto> fotos = new ArrayList<>();
 
@@ -63,7 +61,7 @@ public class Album extends Fachobjekt implements Comparable<Album> {
         sw.write(toString());
         sw.flush();
     }
-    
+
     public void drucke() {
         System.out.println(toString());
     }
