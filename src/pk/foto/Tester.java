@@ -43,5 +43,6 @@ public class Tester {
         
         Stage stage = new Stage();
         var albumerfassungview1 = new AlbumErfassungView(stage);
+        albumerfassungview1.showView();
     }
 }

@@ -3,6 +3,7 @@ Fotos.dat
 .classpath
 .project
 .vscode/
+lib/**/*
 # Compiled class file
 *.class
 
