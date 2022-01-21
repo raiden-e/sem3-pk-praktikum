@@ -6,8 +6,9 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import pk.exceptions.AlbumVorhandenException;
+import pk.exceptions.FotoMetadatenException;
 import pk.exceptions.UngueltigeMenueAuswahlException;
-import pk.foto.ui.*;
 
 public class Menu {
     static FotoVerwaltung fotoverwaltung;
@@ -34,7 +35,7 @@ public class Menu {
                 try {
                     input = sc.nextInt();
                     if (input == 1)
-                        menuAddAlbum(args);
+                        menuAddAlbum();
                     else if (input == 2)
                         fotoverwaltung.druckeAlleAlben();
                     else if (input == 3)
@@ -66,28 +67,24 @@ public class Menu {
         System.out.println(fotoverwaltung.findeAlbumMitName(inp));
     }
 
-//    private static void menuAddAlbum() {
-//        String name = getInput("Namen");
-//        String owner = getInput("Besitzer");
-//        Album alb = new Album(name, owner);
-//        while (JOptionPane.showConfirmDialog(null, "Foto hinzufügen?", "Foto hinzufügen",
-//                JOptionPane.YES_NO_OPTION) == 0) {
-//            String name1 = getInput("Namen", true);
-//            try {
-//                alb.addFoto(new File(name1));
-//            } catch (FotoMetadatenException e) {
-//                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//
-//        }
-//        try {
-//            fotoverwaltung.addAlbum(alb);
-//        } catch (AlbumVorhandenException e) {
-//            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
-    private static void menuAddAlbum(String[] args) {
-        GUI.main(args);
+    private static void menuAddAlbum() {
+        String name = getInput("Namen");
+        String owner = getInput("Besitzer");
+        Album alb = new Album(name, owner);
+        while (JOptionPane.showConfirmDialog(null, "Foto hinzufügen?", "Foto hinzufügen",
+                JOptionPane.YES_NO_OPTION) == 0) {
+            String name1 = getInput("Namen", true);
+            try {
+                alb.addFoto(new File(name1));
+            } catch (FotoMetadatenException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        try {
+            fotoverwaltung.addAlbum(alb);
+        } catch (AlbumVorhandenException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private static String getInput(String param) {

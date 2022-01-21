@@ -2,17 +2,17 @@ package pk.foto.ui;
 
 import java.io.File;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pk.foto.*;
 import pk.foto.util.FotoUtil;
 
 public class FotoErfassungView extends ErfassungView<Object> {
-    public File file = new File("irgendwo");
+    Button bDatei = new Button("Datei auswählen");
+    Label lDatei = new Label("Datei:");
+    public File file = new File("Keine Datei ausgewählt");
 
     private Label lDateiPfad = new Label("Keine Datei ausgewählt");
 
@@ -22,11 +22,17 @@ public class FotoErfassungView extends ErfassungView<Object> {
 
     public boolean showView() {
         super.showView();
-        var bDatei = new Button("Datei auswählen");
-        var lDatei = new Label("Datei:");
+        this.setTitle("Foto Erfassen");
+        setButtons();
 
-        DirectoryChooser chooser = new DirectoryChooser();
-        bDatei.setOnAction(new ClickHandlerPath(chooser, stage));
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Ordner auswählen");
+        chooser.setInitialDirectory(new File("C:/Users/" + System.getProperty("user.name")));
+        bDatei.setOnAction(e -> {
+            file = chooser.showOpenDialog(stage);
+            if (file != null)
+                lDateiPfad.setText(file.getAbsolutePath());
+        });
 
         gridpane.add(lDatei, 0, 1);
         gridpane.add(bDatei, 2, 1);
@@ -35,6 +41,18 @@ public class FotoErfassungView extends ErfassungView<Object> {
         stage.setTitle("Foto hinzufügen");
         showAndWait();
         return super.showView();
+    }
+
+    public void setButtons() {
+        bOk.setOnAction(e -> {
+            super.choice = true;
+            System.out.println(gibNeuesObjekt());
+            this.close();
+        });
+        bAbbrechen.setOnAction(e -> {
+            super.choice = false;
+            this.close();
+        });
     }
 
     public Object gibNeuesObjekt() {
@@ -47,25 +65,6 @@ public class FotoErfassungView extends ErfassungView<Object> {
         } catch (Exception e) {
             System.out.println("ERROR: \n" + e.getMessage());
             return false;
-        }
-    }
-
-    public class ClickHandlerPath implements EventHandler<ActionEvent> {
-        // TODO: Warum verwenden wir einen DirectoryChooser??
-        private DirectoryChooser dc;
-        private Stage stage;
-
-        public ClickHandlerPath(DirectoryChooser dc, Stage stage) {
-            this.dc = dc;
-            this.stage = stage;
-        }
-
-        @Override
-        public void handle(ActionEvent event) {
-            dc.setInitialDirectory(new File("C:/Users/" + System.getProperty("user.name")));
-            file = dc.showDialog(stage);
-            if (file != null)
-                lDateiPfad.setText(file.getAbsolutePath());
         }
     }
 }
