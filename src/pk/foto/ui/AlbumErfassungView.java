@@ -14,14 +14,14 @@ public class AlbumErfassungView extends ErfassungView<Object> {
 
     public boolean showView() {
         super.showView();
-        this.setTitle("Album Erfassen");
+        this.setTitle("Neues Album erfassen");
         setButtons();
 
         var lBesitzer = new Label("Besitzer:");
         tfBesitzer.setMaxWidth(Double.MAX_VALUE);
 
-        gridpane.add(lBesitzer, 0, 1);
-        gridpane.add(tfBesitzer, 1, 1);
+//        gridpane.add(lBesitzer, 0, 1);
+//        gridpane.add(tfBesitzer, 1, 1);
 
         stage.setTitle("Neues Album erstellen");
 
