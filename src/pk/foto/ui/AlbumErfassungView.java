@@ -1,13 +1,12 @@
 package pk.foto.ui;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import pk.foto.Album;
 
 public class AlbumErfassungView extends ErfassungView<Object> {
-    TextField tfBesitzer = new TextField();
-
     public AlbumErfassungView(Stage stage) {
         super(stage);
     }
@@ -17,31 +16,28 @@ public class AlbumErfassungView extends ErfassungView<Object> {
         this.setTitle("Neues Album erfassen");
         setButtons();
 
-        var lBesitzer = new Label("Besitzer:");
-        tfBesitzer.setMaxWidth(Double.MAX_VALUE);
-
-//        gridpane.add(lBesitzer, 0, 1);
-//        gridpane.add(tfBesitzer, 1, 1);
-
-        stage.setTitle("Neues Album erstellen");
-
+        stage.setTitle("Neues Album erfassen");
         showAndWait();
         return super.showView();
     }
 
-    public Object gibNeuesObjekt() {
-        return new Album(super.tfName.getText(), tfBesitzer.getText());
-    }
-
     public void setButtons() {
         bOk.setOnAction(e -> {
+            if (super.tfName.getText() == "" || tfOwner.getText() == "") {
+                (new Alert(AlertType.CONFIRMATION, "Uff Bruder, das lepsch", ButtonType.OK)).showAndWait();
+                return;
+            }
             super.choice = true;
             System.out.println(gibNeuesObjekt());
-            this.stage.close();
+            this.close();
         });
         bAbbrechen.setOnAction(e -> {
             super.choice = false;
-            this.stage.close();
+            this.close();
         });
+    }
+
+    public Object gibNeuesObjekt() {
+        return new Album(super.tfName.getText(), tfOwner.getText());
     }
 }

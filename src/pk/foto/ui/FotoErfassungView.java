@@ -10,10 +10,9 @@ import pk.foto.*;
 import pk.foto.util.FotoUtil;
 
 public class FotoErfassungView extends ErfassungView<Object> {
-    Button bDatei = new Button("Datei auswählen");
-    Label lDatei = new Label("Datei:");
-    public File file = new File("Keine Datei ausgewählt");
-
+    private Button bDatei = new Button("Datei auswählen");
+    private Label lDatei = new Label("Datei:");
+    private File file = new File("Keine Datei ausgewählt");
     private Label lDateiPfad = new Label("Keine Datei ausgewählt");
 
     public FotoErfassungView(Stage stage) {
@@ -33,10 +32,7 @@ public class FotoErfassungView extends ErfassungView<Object> {
             if (file != null)
                 lDateiPfad.setText(file.getAbsolutePath());
         });
-
-        gridpane.add(lDatei, 0, 1);
-        gridpane.add(bDatei, 2, 1);
-        gridpane.add(lDateiPfad, 1, 1);
+        
 
         stage.setTitle("Foto hinzufügen");
         showAndWait();
