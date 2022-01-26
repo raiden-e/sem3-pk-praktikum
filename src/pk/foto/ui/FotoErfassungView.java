@@ -1,12 +1,16 @@
 package pk.foto.ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -20,7 +24,7 @@ public class FotoErfassungView extends ErfassungView<Object> {
     private Label lName = new Label("Name:");
     private Label lDatei = new Label("Datei:");
     private Label lDateiPfad = new Label("Keine Datei ausgewählt");
-    private File file = new File("Keine Datei ausgewählt");
+    private File file; //= new File("Keine Datei ausgewählt");
     private TextField tfName = new TextField();
     private HBox hbSub = new HBox();
 
@@ -78,8 +82,28 @@ public class FotoErfassungView extends ErfassungView<Object> {
 
     public void setButtons() {
         bOk.setOnAction(e -> {
+            if (tfName.getText() == "") {
+                (new Alert(AlertType.WARNING, "Bitte geben Sie einen Namen an!", ButtonType.OK)).showAndWait();
+                return;
+            }
+            if (file == null) {
+                (new Alert(AlertType.WARNING, "Bitte wählen Sie eine Datei aus!", ButtonType.OK)).showAndWait();
+                return;
+            }
             super.choice = true;
-            System.out.println(gibNeuesObjekt());
+            Foto foto = (Foto) gibNeuesObjekt();
+            
+            
+                
+            System.out.println(foto);
+            FotoUI.selectedAlbum.addFoto(foto);
+            FotoUI.lMetaDescVal.setText(FotoUI.selectedAlbum.getFotos()[0].toString());
+            try {
+                FotoUI.updateGallery();
+            } catch (FileNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
             this.close();
         });
         bAbbrechen.setOnAction(e -> {
@@ -94,7 +118,7 @@ public class FotoErfassungView extends ErfassungView<Object> {
         try {
             var meta = FotoUtil.readMetadata(file);
             System.out.println(meta);
-            return new Foto(super.tfName.getText(), file.getPath(), meta);
+            return new Foto(tfName.getText(), file.getPath(), meta);
         } catch (Exception e) {
             System.out.println("ERROR: \n" + e.getMessage());
             return false;

@@ -10,9 +10,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import pk.exceptions.AlbumVorhandenException;
 import pk.foto.Album;
 
-public class AlbumErfassungView extends ErfassungView<Object> {
+public class AlbumErfassungView extends ErfassungView<Object>{
     Label lName = new Label("Name:");
     Label lOwner = new Label("Besitzer:");
 
@@ -63,14 +64,23 @@ public class AlbumErfassungView extends ErfassungView<Object> {
         return super.showView();
     }
 
-    public void setButtons() {
+    public void setButtons(){
         bOk.setOnAction(e -> {
-            if (super.tfName.getText() == "" || tfOwner.getText() == "") {
-                (new Alert(AlertType.CONFIRMATION, "Uff Bruder, das lepsch", ButtonType.OK)).showAndWait();
+            if (tfName.getText() == "" || tfOwner.getText() == "") {
+                (new Alert(AlertType.WARNING, "Bitte geben Sie Name und Besitzer an!", ButtonType.OK)).showAndWait();
                 return;
             }
             super.choice = true;
-            System.out.println(gibNeuesObjekt());
+            Album alb = (Album) gibNeuesObjekt();
+            System.out.println(alb);
+            try {
+                FotoUI.fv.addAlbum(alb);
+                FotoUI.updateListView(alb);
+                FotoUI.lMetaDescVal.setText("");
+            } catch (AlbumVorhandenException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
             this.close();
         });
         bAbbrechen.setOnAction(e -> {

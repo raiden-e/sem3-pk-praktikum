@@ -5,6 +5,10 @@ import java.util.TreeSet;
 
 import javax.swing.JOptionPane;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import pk.exceptions.AlbumVorhandenException;
+import pk.foto.ui.FotoUI;
 
 public class FotoVerwaltung {
     TreeSet<Album> alben = new TreeSet<>();
@@ -93,13 +98,20 @@ public class FotoVerwaltung {
     }
 
     public void laden() {
+        
         File file = new File("Fotos.dat");
+        if (!file.exists()) {
+            (new Alert(AlertType.WARNING, "Keine Datei zum Laden gefunden.", ButtonType.OK)).showAndWait();
+            return;
+        }
         try (FileInputStream fis = new FileInputStream(file);
                 ObjectInputStream ois = new ObjectInputStream(fis)) {
             this.alben = (TreeSet<Album>) ois.readObject();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
+        for (Album album : alben)
+            FotoUI.updateListView(album);
     }
 
     public void speichern() throws IOException {

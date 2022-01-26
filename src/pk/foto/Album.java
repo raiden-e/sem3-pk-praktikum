@@ -31,6 +31,10 @@ public class Album extends Fachobjekt implements Comparable<Album> {
 
         return rueckgabe;
     }
+    
+    public String getBesitzer() {
+        return besitzer;
+    }
 
     public void addFoto(Foto foto) {
         fotos.add(foto);
@@ -40,7 +44,7 @@ public class Album extends Fachobjekt implements Comparable<Album> {
         try {
             var meta = FotoUtil.readMetadata(file);
             System.out.println(meta);
-            Foto foto1 = new Foto(file.getName(), file.getName(), meta);
+            Foto foto1 = new Foto(file.getName(), file.getAbsolutePath(), meta);
             this.addFoto(foto1);
         } catch (Exception e) {
             throw new FotoMetadatenException(e.getMessage());

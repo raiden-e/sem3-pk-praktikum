@@ -22,6 +22,10 @@ public class FotoMetadaten implements CsvExportable, Serializable {
         this.kameraModell = pkameraModell;
         this.erstellungszeitpunkt = perstellungszeitpunkt;
     }
+    
+    public int[] getDimensions() {
+        return new int[] {hoehe, breite};
+    }
 
     private String getDateText() {
         DateTimeFormatter date = DateTimeFormatter.ofPattern("dd.MM.YYYY HH:mm:ss");
