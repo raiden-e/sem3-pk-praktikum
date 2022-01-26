@@ -40,7 +40,7 @@ public class Album extends Fachobjekt implements Comparable<Album> {
         try {
             var meta = FotoUtil.readMetadata(file);
             System.out.println(meta);
-            Foto foto1 = new Foto(file.getPath(), file.getPath(), meta);
+            Foto foto1 = new Foto(file.getName(), file.getName(), meta);
             this.addFoto(foto1);
         } catch (Exception e) {
             throw new FotoMetadatenException(e.getMessage());
@@ -48,12 +48,7 @@ public class Album extends Fachobjekt implements Comparable<Album> {
     }
 
     public String toString() {
-        String x = String.format("Name: %s\nBesitzer: %s", super.getName(), besitzer);
-        int counter = 1;
-        for (Foto foto : fotos)
-            x += String.format("\n=== Foto %s ===\n%-4s", counter++, foto);
-
-        return x;
+        return super.getName();
     }
 
     public void drucke(OutputStream stream) throws IOException {

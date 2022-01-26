@@ -2,8 +2,14 @@ package pk.foto.ui;
 
 import java.io.File;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pk.foto.*;
@@ -11,9 +17,12 @@ import pk.foto.util.FotoUtil;
 
 public class FotoErfassungView extends ErfassungView<Object> {
     private Button bDatei = new Button("Datei auswählen");
+    private Label lName = new Label("Name:");
     private Label lDatei = new Label("Datei:");
-    private File file = new File("Keine Datei ausgewählt");
     private Label lDateiPfad = new Label("Keine Datei ausgewählt");
+    private File file = new File("Keine Datei ausgewählt");
+    private TextField tfName = new TextField();
+    private HBox hbSub = new HBox();
 
     public FotoErfassungView(Stage stage) {
         super(stage);
@@ -25,14 +34,42 @@ public class FotoErfassungView extends ErfassungView<Object> {
         setButtons();
 
         FileChooser chooser = new FileChooser();
-        chooser.setTitle("Ordner auswählen");
+        chooser.setTitle("Datei auswählen");
         chooser.setInitialDirectory(new File("C:/Users/" + System.getProperty("user.name")));
         bDatei.setOnAction(e -> {
             file = chooser.showOpenDialog(stage);
             if (file != null)
                 lDateiPfad.setText(file.getAbsolutePath());
         });
-        
+        lName.setAlignment(Pos.CENTER_LEFT);
+        lDatei.setAlignment(Pos.CENTER_LEFT);
+        lDateiPfad.setAlignment(Pos.CENTER_LEFT);
+
+        hb2.setAlignment(Pos.BOTTOM_CENTER);
+        hb1.setAlignment(Pos.CENTER_LEFT);
+        hbSub.setAlignment(Pos.CENTER_RIGHT);
+        bDatei.setAlignment(Pos.TOP_RIGHT);
+        lDatei.setAlignment(Pos.CENTER_LEFT);
+        lDateiPfad.setAlignment(Pos.CENTER_LEFT);
+
+        // new Insets(Top, Left, Bottom, Right)
+        lName.setPadding(new Insets(0, 10, 0, 0));
+        lDatei.setPadding(new Insets(0, 10, 0, 0));
+        lDateiPfad.setPadding(new Insets(0, 10, 0, 0));
+
+        hb2.setSpacing(5);
+
+        HBox.setHgrow(hbSub, Priority.ALWAYS);
+        HBox.setHgrow(tfName, Priority.ALWAYS);
+        HBox.setHgrow(hb1, Priority.ALWAYS);
+        VBox.setVgrow(hb2, Priority.ALWAYS);
+        tfName.setMaxWidth(Double.MAX_VALUE);
+
+        hbSub.getChildren().add(bDatei);
+        hb0.getChildren().addAll(lName, tfName);
+        hb1.getChildren().addAll(lDatei, lDateiPfad, hbSub);
+        hb2.getChildren().addAll(bOk, bAbbrechen);
+        vbMain.getChildren().addAll(hb0, hb1, hb2);
 
         stage.setTitle("Foto hinzufügen");
         showAndWait();

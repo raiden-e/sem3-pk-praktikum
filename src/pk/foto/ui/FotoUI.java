@@ -1,10 +1,17 @@
 package pk.foto.ui;
 
+import pk.foto.Album;
+import pk.foto.Foto;
+import pk.foto.FotoVerwaltung;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import javafx.application.Application;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -59,13 +66,25 @@ public class FotoUI extends Application {
         Label lAlbumVal = new Label("Menschen\nSven");
         Button bKopfbereichFotoHinzufügen = new Button("Foto hinzufügen");
 
-        ListView<String> listView = new ListView<>();
+        ListView<Album> listView = new ListView<>();
 
         Rectangle rect = new Rectangle(200, 200, Color.BLUE);
         ScrollPane spGalerie = new ScrollPane();
 
         Label lMetaDesc = new Label("Name:\nDateiname:\nGröße:\nKamera:\nErstellungsdatum:");
         Label lMetaDescVal = new Label("Peter\npeter.jpg\n1920 x 1920 px\nNikon noice Cam\nDamals");
+
+        File file = new File("images/DSC02033.jpg");
+        System.out.println(file);
+        Album album1 = new Album("Album1", "Dieter");
+        album1.addFoto(file);
+        file = new File("images/35835723323_b3ed4bf5d1_o.jpg");
+        album1.addFoto(file);
+
+        FotoVerwaltung fv1 = new FotoVerwaltung();
+
+        fv1.addAlbum(album1);
+
 
         m1.getItems().addAll(mi1, mi2, new SeparatorMenuItem(), mi3, new SeparatorMenuItem(), mi4);
         m2.getItems().addAll(miA);
@@ -76,8 +95,21 @@ public class FotoUI extends Application {
         hbKopfbereich3.getChildren().addAll(bKopfbereichFotoHinzufügen);
         hbKopfbereich.getChildren().addAll(vbKopfbereich1, vbKopfbereich2, hbKopfbereich3);
 
-        listView.getItems().addAll("Menschen", "Naturbilder", "Test:");
+        listView.getItems().addAll(fv1.gibAlleAlben());
 
+        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Album>() {
+                @Override
+                public void changed(ObservableValue<? extends Album> observable, Album oldValue, Album newValue) {
+                    System.out.println("old val: " + oldValue + "\nNew val: " + newValue);
+                    for(Foto foto: newValue.getFotos()) {
+                        // update spGallery
+                        System.out.println(foto);
+                    }
+                    lMetaDescVal.setText(newValue.getFotos()[0].toString());
+            }
+        });
+
+        System.out.println("hello");
         hbContent.getChildren().addAll(listView, vbSub);
         hbMetaInformationen.getChildren().addAll(lMetaDesc, lMetaDescVal);
 
@@ -118,6 +150,7 @@ public class FotoUI extends Application {
             System.out.println(exitCode);
         });
     }
+
 
     private ImageView createThumbnail(String imageFile, int width) throws FileNotFoundException {
         ImageView iv = new ImageView(new Image(new FileInputStream(new File(imageFile)), width * 2, 0, true, true));

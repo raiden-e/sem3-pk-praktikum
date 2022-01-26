@@ -5,6 +5,7 @@ module pk {
 
     requires metadata.extractor;
     requires xmpcore;
+    requires javafx.base;
 
     opens pk.foto.ui to javafx.graphics;
 }

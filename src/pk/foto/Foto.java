@@ -34,7 +34,7 @@ public class Foto extends Fachobjekt {
     }
 
     public String toString() {
-        return String.format("Fotoname: %s\nDateiname: %s\n%s\n", super.getName(), dateiName, metadaten);
+        return String.format("%s\n%s\n%s\n", super.getName(), dateiName, metadaten);
     }
 
     public String exportiereAlsCsv() {

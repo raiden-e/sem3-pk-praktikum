@@ -29,7 +29,7 @@ public class FotoMetadaten implements CsvExportable, Serializable {
     }
 
     public String toString() {
-        return String.format("Groesse: %s x %s\nKamera: %s - %s\nErstellungsdatum: %s", hoehe, breite, kameraMarke,
+        return String.format("%s x %s px\n%s - %s\n%s", hoehe, breite, kameraMarke,
                 kameraModell, this.getDateText());
     }
 
