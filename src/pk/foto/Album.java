@@ -31,7 +31,7 @@ public class Album extends Fachobjekt implements Comparable<Album> {
 
         return rueckgabe;
     }
-    
+
     public String getBesitzer() {
         return besitzer;
     }

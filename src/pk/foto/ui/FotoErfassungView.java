@@ -20,22 +20,49 @@ import pk.foto.*;
 import pk.foto.util.FotoUtil;
 
 public class FotoErfassungView extends ErfassungView<Object> {
-    private Button bDatei = new Button("Datei auswählen");
-    private Label lName = new Label("Name:");
-    private Label lDatei = new Label("Datei:");
-    private Label lDateiPfad = new Label("Keine Datei ausgewählt");
-    private File file; //= new File("Keine Datei ausgewählt");
-    private TextField tfName = new TextField();
-    private HBox hbSub = new HBox();
+    private static Button bDatei = new Button("Datei auswählen");
+    private static Label lDatei = new Label("Datei:");
+    private static Label lDateiPfad = new Label("Keine Datei ausgewählt");
+    private static File file;
+    private static HBox hbSub = new HBox();
 
     public FotoErfassungView(Stage stage) {
         super(stage);
     }
 
     public boolean showView() {
-        super.showView();
-        this.setTitle("Foto Erfassen");
+
         setButtons();
+
+        hbSub.getChildren().add(bDatei);
+        hb0.getChildren().addAll(lName, tfName);
+        hb1.getChildren().addAll(lDatei, lDateiPfad, hbSub);
+        hb2.getChildren().addAll(bOk, bAbbrechen);
+        vbMain.getChildren().addAll(hb0, hb1, hb2);
+
+        // new Insets(Top, Left, Bottom, Right)
+        lName.setPadding(new Insets(0, 10, 0, 0));
+        lDatei.setPadding(new Insets(0, 10, 0, 0));
+        lDateiPfad.setPadding(new Insets(0, 10, 0, 0));
+
+        tfName.setMaxWidth(Double.MAX_VALUE);
+
+        hb2.setSpacing(5);
+
+        lName.setAlignment(Pos.CENTER_LEFT);
+        lDatei.setAlignment(Pos.CENTER_LEFT);
+        lDateiPfad.setAlignment(Pos.CENTER_LEFT);
+        hb2.setAlignment(Pos.BOTTOM_CENTER);
+        hb1.setAlignment(Pos.CENTER_LEFT);
+        hbSub.setAlignment(Pos.CENTER_RIGHT);
+        bDatei.setAlignment(Pos.TOP_RIGHT);
+        lDatei.setAlignment(Pos.CENTER_LEFT);
+        lDateiPfad.setAlignment(Pos.CENTER_LEFT);
+
+        HBox.setHgrow(hbSub, Priority.ALWAYS);
+        HBox.setHgrow(tfName, Priority.ALWAYS);
+        HBox.setHgrow(hb1, Priority.ALWAYS);
+        VBox.setVgrow(hb2, Priority.ALWAYS);
 
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Datei auswählen");
@@ -45,37 +72,10 @@ public class FotoErfassungView extends ErfassungView<Object> {
             if (file != null)
                 lDateiPfad.setText(file.getAbsolutePath());
         });
-        lName.setAlignment(Pos.CENTER_LEFT);
-        lDatei.setAlignment(Pos.CENTER_LEFT);
-        lDateiPfad.setAlignment(Pos.CENTER_LEFT);
 
-        hb2.setAlignment(Pos.BOTTOM_CENTER);
-        hb1.setAlignment(Pos.CENTER_LEFT);
-        hbSub.setAlignment(Pos.CENTER_RIGHT);
-        bDatei.setAlignment(Pos.TOP_RIGHT);
-        lDatei.setAlignment(Pos.CENTER_LEFT);
-        lDateiPfad.setAlignment(Pos.CENTER_LEFT);
+        super.showView();
+        this.setTitle("Foto hinzufügen");
 
-        // new Insets(Top, Left, Bottom, Right)
-        lName.setPadding(new Insets(0, 10, 0, 0));
-        lDatei.setPadding(new Insets(0, 10, 0, 0));
-        lDateiPfad.setPadding(new Insets(0, 10, 0, 0));
-
-        hb2.setSpacing(5);
-
-        HBox.setHgrow(hbSub, Priority.ALWAYS);
-        HBox.setHgrow(tfName, Priority.ALWAYS);
-        HBox.setHgrow(hb1, Priority.ALWAYS);
-        VBox.setVgrow(hb2, Priority.ALWAYS);
-        tfName.setMaxWidth(Double.MAX_VALUE);
-
-        hbSub.getChildren().add(bDatei);
-        hb0.getChildren().addAll(lName, tfName);
-        hb1.getChildren().addAll(lDatei, lDateiPfad, hbSub);
-        hb2.getChildren().addAll(bOk, bAbbrechen);
-        vbMain.getChildren().addAll(hb0, hb1, hb2);
-
-        stage.setTitle("Foto hinzufügen");
         showAndWait();
         return super.showView();
     }
@@ -92,16 +92,13 @@ public class FotoErfassungView extends ErfassungView<Object> {
             }
             super.choice = true;
             Foto foto = (Foto) gibNeuesObjekt();
-            
-            
-                
+
             System.out.println(foto);
             FotoUI.selectedAlbum.addFoto(foto);
             FotoUI.lMetaDescVal.setText(FotoUI.selectedAlbum.getFotos()[0].toString());
             try {
                 FotoUI.updateGallery();
             } catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             this.close();

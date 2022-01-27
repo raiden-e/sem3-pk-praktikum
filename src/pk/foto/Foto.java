@@ -22,14 +22,15 @@ public class Foto extends Fachobjekt {
         this.dateiName = dateiName;
         metadaten = meta;
     }
-    
+
     public FotoMetadaten getMetadaten() {
         return metadaten;
     }
-    
+
     public String getFilePath() {
         return dateiName;
     }
+
     public void drucke(OutputStream stream) throws IOException {
         OutputStreamWriter sw = new OutputStreamWriter(stream);
         sw.write(toString());

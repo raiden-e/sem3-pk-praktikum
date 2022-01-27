@@ -98,14 +98,13 @@ public class FotoVerwaltung {
     }
 
     public void laden() {
-        
+
         File file = new File("Fotos.dat");
         if (!file.exists()) {
             (new Alert(AlertType.WARNING, "Keine Datei zum Laden gefunden.", ButtonType.OK)).showAndWait();
             return;
         }
-        try (FileInputStream fis = new FileInputStream(file);
-                ObjectInputStream ois = new ObjectInputStream(fis)) {
+        try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
             this.alben = (TreeSet<Album>) ois.readObject();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();

@@ -9,62 +9,62 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pk.exceptions.AlbumVorhandenException;
 import pk.foto.Album;
 
-public class AlbumErfassungView extends ErfassungView<Object>{
-    Label lName = new Label("Name:");
+public class AlbumErfassungView extends ErfassungView<Object> {
+
     Label lOwner = new Label("Besitzer:");
+    TextField tfOwner = new TextField();
 
     public AlbumErfassungView(Stage stage) {
         super(stage);
     }
 
     public boolean showView() {
-        super.showView();
-        this.setTitle("Neues Album erfassen");
+
         setButtons();
-
-        // new Insets(Top, Left, Bottom, Right)
-        lName.setPadding(new Insets(0, 10, 0, 0));
-        lOwner.setPadding(new Insets(0, 10, 0, 0));
-
-        tfOwner.setPadding(new Insets(2));
-        tfName.setPadding(new Insets(2));
-
-        lName.setAlignment(Pos.CENTER_LEFT);
-        lOwner.setAlignment(Pos.CENTER_LEFT);
-        hb2.setAlignment(Pos.BOTTOM_CENTER);
-
-        tfOwner.setMaxWidth(Double.MAX_VALUE);
-        tfName.setMaxWidth(Double.MAX_VALUE);
-
-        HBox.setHgrow(tfOwner, Priority.ALWAYS);
-        HBox.setHgrow(tfName, Priority.ALWAYS);
-
-        HBox.setHgrow(hb0, Priority.ALWAYS);
-        HBox.setHgrow(hb1, Priority.ALWAYS);
-        HBox.setHgrow(hb2, Priority.ALWAYS);
-        VBox.setVgrow(hb2, Priority.ALWAYS);
-        VBox.setVgrow(vbMain, Priority.ALWAYS);
-        // Add items to scene
 
         hb0.getChildren().addAll(lName, tfName);
         hb1.getChildren().addAll(lOwner, tfOwner);
         hb2.getChildren().addAll(bOk, bAbbrechen);
         vbMain.getChildren().addAll(hb0, hb1, hb2);
 
+        // Insets(double top, double right, double bottom, double left)
+        lName.setPadding(new Insets(0, 10, 0, 0));
+        lOwner.setPadding(new Insets(0, 10, 0, 0));
+        tfOwner.setPadding(new Insets(2));
+        tfName.setPadding(new Insets(2));
+
+        tfOwner.setMaxWidth(Double.MAX_VALUE);
+        tfName.setMaxWidth(Double.MAX_VALUE);
+
         hb0.setSpacing(3.0);
         hb1.setSpacing(3.0);
         hb2.setSpacing(3.0);
-        
-        stage.setTitle("Neues Album erfassen");
+
+        lName.setAlignment(Pos.CENTER_LEFT);
+        lOwner.setAlignment(Pos.CENTER_LEFT);
+        hb2.setAlignment(Pos.BOTTOM_CENTER);
+
+        HBox.setHgrow(tfOwner, Priority.ALWAYS);
+        HBox.setHgrow(tfName, Priority.ALWAYS);
+        HBox.setHgrow(hb0, Priority.ALWAYS);
+        HBox.setHgrow(hb1, Priority.ALWAYS);
+        HBox.setHgrow(hb2, Priority.ALWAYS);
+        VBox.setVgrow(hb2, Priority.ALWAYS);
+        VBox.setVgrow(vbMain, Priority.ALWAYS);
+
+        super.showView();
+        this.setTitle("Neues Album erfassen");
+
         showAndWait();
         return super.showView();
     }
 
-    public void setButtons(){
+    public void setButtons() {
         bOk.setOnAction(e -> {
             if (tfName.getText() == "" || tfOwner.getText() == "") {
                 (new Alert(AlertType.WARNING, "Bitte geben Sie Name und Besitzer an!", ButtonType.OK)).showAndWait();
@@ -78,8 +78,7 @@ public class AlbumErfassungView extends ErfassungView<Object>{
                 FotoUI.updateListView(alb);
                 FotoUI.lMetaDescVal.setText("");
             } catch (AlbumVorhandenException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+                (new Alert(AlertType.WARNING, "Dieses Album existiert bereits!", ButtonType.OK)).showAndWait();
             }
             this.close();
         });
