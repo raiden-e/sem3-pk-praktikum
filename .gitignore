@@ -4,6 +4,7 @@ Fotos.dat
 .project
 .vscode/
 lib/**/*
+.idea/
 # Compiled class file
 *.class
 
